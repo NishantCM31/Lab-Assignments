@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Order Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .book {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .book img {
+            width: 100px;
+            height: 150px;
+            margin-right: 20px;
+        }
+        .book-details {
+            display: none;
+            margin-top: 10px;
+        }
+        .order-form {
+            margin-top: 20px;
+        }
+        .response-message {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Online Book Order Form</h1>
+
+<!-- Book Section -->
+<div class="book">
+    <img src="book_image_url.jpg" alt="Book Image">
+    <div>
+        <h2>Book Title</h2>
+        <p>Book description goes here...</p>
+        <p><strong>Reviews:</strong> ⭐⭐⭐⭐☆</p>
+        <button onclick="toggleDetails('book1-details')">View Details</button>
+    </div>
+</div>
+<div id="book1-details" class="book-details">
+    <p><strong>Topics:</strong></p>
+    <ul>
+        <li>Topic 1</li>
+        <li>Topic 2</li>
+        <li>Topic 3</li>
+    </ul>
+    <p><strong>Author:</strong> Author Name</p>
+    <p><strong>Publication Date:</strong> Publication Date</p>
+    <p><strong>ISBN:</strong> ISBN Number</p>
+    <p><strong>Publisher:</strong> Publisher Information</p>
+</div>
+
+<!-- Order Form Section -->
+<div class="order-form">
+    <h2>Order Details</h2>
+    <form id="orderForm">
+        <fieldset>
+            <legend>Customer Address</legend>
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" required><br><br>
+
+            <label for="address">Street Address:</label>
+            <input type="text" id="address" name="address" required><br><br>
+
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" required><br><br>
+
+            <label for="state">State/Province:</label>
+            <input type="text" id="state" name="state" required><br><br>
+
+            <label for="zip">Zip/Postal Code:</label>
+            <input type="text" id="zip" name="zip" required><br><br>
+
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country" required><br><br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Payment Details</legend>
+            <label for="cardName">Cardholder Name:</label>
+            <input type="text" id="cardName" name="cardName" required><br><br>
+
+            <label for="cardNumber">Credit/Debit Card Number:</label>
+            <input type="text" id="cardNumber" name="cardNumber" required><br><br>
+
+            <label for="expDate">Expiration Date:</label>
+            <input type="text" id="expDate" name="expDate" required><br><br>
+
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" required><br><br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Order Details</legend>
+            <label for="copies">Number of Copies:</label>
+            <input type="number" id="copies" name="copies" required><br><br>
+        </fieldset>
+
+        <button type="button" onclick="submitOrder()">Submit Order</button>
+    </form>
+</div>
+
+<div class="response-message" id="responseMessage"></div>
+
+<script>
+    function toggleDetails(detailsId) {
+        const details = document.getElementById(detailsId);
+        if (details.style.display === 'none' || details.style.display === '') {
+            details.style.display = 'block';
+        } else {
+            details.style.display = 'none';
+        }
+    }
+
+    function submitOrder() {
+        const form = document.getElementById('orderForm');
+        if (form.checkValidity()) {
+            // Here you would normally handle the form submission,
+            // e.g., sending the data to a server and getting a response.
+            // For this example, we'll just display a confirmation message.
+
+            document.getElementById('responseMessage').innerText = 'Order Confirmed!';
+        } else {
+            document.getElementById('responseMessage').innerText = 'Order Pending. Please fill out all required fields.';
+        }
+    }
+</script>
+
+</body>
+</html>
