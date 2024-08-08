@@ -3,91 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Order Form</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Frame Table</title>
+    <style>
+        body {
+            background-color: rgb(255, 255, 255); /* Make the background color red */
+        }
+        table {
+            width: 70%; /* Set the width of the table */
+            border-collapse: collapse;
+            margin: 0 auto; /* Center the table on the screen */
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        p {
+            font-family: Arial, sans-serif; /* Display all paragraphs in Arial font */
+            font-weight: bold; /* Make all paragraphs bold */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: normal; /* Make all headers with normal font */
+            font-size: 150%; /* Set font size to 150% for all headers */
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Online Book Order</h1>
 
-        <div class="book-selection">
-            <label for="book-select">Choose a book:</label>
-            <select id="book-select">
-                <option value="" disabled selected>Select a book</option>
-                <option value="book1">Book Title 1</option>
-                <option value="book2">Book Title 2</option>
-                <option value="book3">Book Title 3</option>
-            </select>
-        </div>
+<table>
+    <tr>
+        <td><strong>First Frame</strong><br>John Doe</td>
+        <td colspan="2"><strong>Second Frame</strong><br>123 Main St, Springfield, USA</td>
+    </tr>
+    <tr>
+        <td rowspan="3"><strong>Third Frame</strong><br>
+            <ul>
+                <li>Bachelor's Degree in Computer Science</li>
+                <li>Certified Java Programmer</li>
+                <li>5 Years Experience in Web Development</li>
+            </ul>
+        </td>
+        <td><strong>Forth Frame</strong><br>
+            <marquee>Welcome to my webpage!</marquee>
+        </td>
+        <td><strong>Fifth Frame</strong><br>
+            <ul>
+                <li><a href="https://www.google.com">Google</a></li>
+                <li><a href="https://www.github.com">GitHub</a></li>
+                <li><a href="https://www.stackoverflow.com">Stack Overflow</a></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2"><strong>Sixth Frame</strong><br>
+            <img src="https://via.placeholder.com/150" alt="Sample Image">
+        </td>
+    </tr>
+</table>
 
-        <!-- Book Information Sections -->
-        <div id="book-info-book1" class="book-info">
-            <img src="book1-cover.jpg" alt="Book Cover" class="book-cover">
-            <div class="book-details">
-                <h2>Book Title 1</h2>
-                <p class="book-description">This is a brief description of Book Title 1.</p>
-                <p class="book-reviews">
-                    <strong>Reviews:</strong> "Excellent read!" - John Doe, "Very informative." - Jane Smith
-                </p>
-                <ul class="book-topics">
-                    <li>Introduction</li>
-                    <li>Chapter 1: Basics</li>
-                    <li>Chapter 2: Advanced Topics</li>
-                </ul>
-            </div>
-        </div>
-
-        <div id="book-info-book2" class="book-info">
-            <img src="book2-cover.jpg" alt="Book Cover" class="book-cover">
-            <div class="book-details">
-                <h2>Book Title 2</h2>
-                <p class="book-description">This is a brief description of Book Title 2.</p>
-                <p class="book-reviews">
-                    <strong>Reviews:</strong> "A must-read for anyone interested in the topic." - Alex Brown, "Well written and engaging." - Emily White
-                </p>
-                <ul class="book-topics">
-                    <li>Overview</li>
-                    <li>Chapter 1: Key Concepts</li>
-                    <li>Chapter 2: Case Studies</li>
-                </ul>
-            </div>
-        </div>
-
-        <div id="book-info-book3" class="book-info">
-            <img src="book3-cover.jpg" alt="Book Cover" class="book-cover">
-            <div class="book-details">
-                <h2>Book Title 3</h2>
-                <p class="book-description">This is a brief description of Book Title 3.</p>
-                <p class="book-reviews">
-                    <strong>Reviews:</strong> "An insightful guide." - Sarah Lee, "Highly recommended." - Michael Green
-                </p>
-                <ul class="book-topics">
-                    <li>Chapter 1: Fundamentals</li>
-                    <li>Chapter 2: Techniques</li>
-                    <li>Chapter 3: Advanced Strategies</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Order Form -->
-        <form class="order-form">
-            <h2>Order Form</h2>
-            <label for="customer-address">Address:</label>
-            <textarea id="customer-address" name="customer-address" rows="4" required></textarea>
-
-            <label for="payment-details">Payment Details:</label>
-            <input type="text" id="payment-details" name="payment-details" required>
-
-            <label for="number-of-copies">Number of Copies:</label>
-            <input type="number" id="number-of-copies" name="number-of-copies" min="1" required>
-
-            <button type="submit">Submit Order</button>
-        </form>
-
-        <!-- Response Message -->
-        <div id="response-message" class="response-message">
-            <p>Order confirmed! Thank you for your purchase.</p>
-        </div>
-    </div>
 </body>
 </html>
