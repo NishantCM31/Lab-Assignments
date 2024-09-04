@@ -1,0 +1,137 @@
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background-color: #020302;
+  color: white;
+  padding: 15px 0;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  flex: 1;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.slider {
+  position: relative;
+  width: 100%;
+  height: 300px; /* Adjust height as needed */
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.slider img {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  transition: opacity 1s ease-in-out;
+}
+
+/* Show the first image initially */
+.slider img:first-child {
+  left: 0;
+  opacity: 1;
+}
+
+/* Add keyframes for sliding effect */
+@keyframes slide {
+  0% { left: 0; opacity: 1; }
+  20% { opacity: 1; }
+  25% { left: -100%; opacity: 0; }
+  45% { opacity: 0; }
+  50% { left: 0; opacity: 1; }
+  70% { opacity: 1; }
+  75% { left: 100%; opacity: 0; }
+  100% { left: 100%; opacity: 0; }
+}
+
+/* Apply animation to the images */
+.slider img {
+  animation: slide 15s infinite;
+}
+
+.welcome {
+  margin-top: 20px;
+  padding: 1rem;
+}
+
+h2 {
+  color: #333;
+}
+
+.faculty-courses {
+  margin-top: 20px;
+}
+
+.faculty-courses h3 {
+  color: #4caf50;
+}
+
+.faculty-courses ul {
+  list-style: none;
+  padding: 0;
+}
+
+.faculty-courses ul li {
+  margin-bottom: 10px;
+}
+
+.faculty-courses ul li a {
+  color: #4caf50;
+  text-decoration: none;
+}
+
+.faculty-courses ul li a:hover {
+  text-decoration: underline;
+}
+
+
+
+
+footer {
+  background: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+

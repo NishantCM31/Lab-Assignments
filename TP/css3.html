@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Cute Styled Hyperlinks</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #fce4ec; /* Soft pink background */
+            color: #880e4f; /* Dark pink text color */
+            padding: 20px;
+            text-align: center;
+        }
+
+        a {
+            display: inline-block;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px 0;
+            border-radius: 15px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        a:link {
+            color: #d32f2f; /* Unvisited link - red */
+            background-color: #ffebee; /* Light red background */
+        }
+
+        a:visited {
+            color: #388e3c; /* Visited link - green */
+            background-color: #e8f5e9; /* Light green background */
+        }
+
+        a:hover {
+            color: #ad1457; /* Mouse over link - pink */
+            background-color: #f8bbd0; /* Light pink background */
+        }
+
+        a:active {
+            color: #1565c0; /* Selected link - blue */
+            background-color: #bbdefb; /* Light blue background */
+        }
+    </style>
+</head>
+<body>
+    <a href="https://gemini.google.com/">Gemini</a><br>
+    <a href="https://www.youtube.com/">YouTube</a><br>
+    <a href="https://www.google.co.in/">Google</a><br>
+    <a href="https://www.geeksforgeeks.org/">GeeksforGeeks</a><br>
+</body>
+</html>

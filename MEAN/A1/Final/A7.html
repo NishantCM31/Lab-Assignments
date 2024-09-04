@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSc CA Class Timetable</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            max-width: 900px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+
+        caption {
+            padding: 10px;
+            font-size: 1.5rem;
+            color: #333;
+            text-align: center;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f8f8f8;
+            font-weight: bold;
+        }
+
+        td {
+            font-size: 16px;
+        }
+
+        /* Different border styles for timetable */
+        td.subject1 {
+            border: 2px dotted red;
+        }
+
+        td.subject2 {
+            border: 2px dashed green;
+        }
+
+        td.subject3 {
+            border: 2px double blue;
+        }
+
+        td.subject4 {
+            border: 2px solid orange;
+        }
+
+        td.subject5 {
+            border: 2px solid purple;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr td[colspan] {
+            text-align: left;
+        }
+
+        tr td[rowspan] {
+            vertical-align: middle;
+        }
+
+        caption h2 {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <caption>
+            <h2>MSc CA Class Timetable</h2>
+        </caption>
+        <tr>
+            <th>Day</th>
+            <th>10:00 - 11:00</th>
+            <th>11:00 - 12:00</th>
+            <th>12:00 - 1:00</th>
+            <th>1:00 - 2:00</th>
+            <th>2:00 - 3:00</th>
+        </tr>
+        <tr>
+            <td>Monday</td>
+            <td class="subject5" colspan="2">Project Lab (B1/B3)</td>
+            <td class="subject4" rowspan="5">Break</td>
+            <td class="subject3">MEAN Stack</td>
+            <td class="subject2">Python</td>
+        </tr>
+        <tr>
+            <td>Tuesday</td>
+            <td class="subject4" colspan="2">Project Lab (B1/B2)</td>
+            <td class="subject5">Software Testing</td>
+            <td class="subject2">Software Testing</td>
+        </tr>
+        <tr>
+            <td>Wednesday</td>
+            <td class="subject3" colspan="2">Project Lab (B2/B3)</td>
+            <td class="subject2">Software Testing</td>
+            <td class="subject1">Software Testing</td>
+        </tr>
+        <tr>
+            <td>Thursday</td>
+            <td class="subject2" colspan="2">MEAN(B1) / Python(B3) Lab</td>
+            <td class="subject1">Python</td>
+            <td class="subject5">MEAN Stack</td>
+        </tr>
+        <tr>
+            <td>Friday</td>
+            <td class="subject1" colspan="2">MEAN(B2) / Python(B1) Lab</td>
+            <td class="subject5">MEAN Stack</td>
+            <td class="subject4">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>Saturday</td>
+            <td class="subject1" colspan="2">MEAN(B3) / Python(B2) Lab</td>
+            <td class="subject5">MEAN Stack</td>
+            <td class="subject4">&nbsp;</td>
+            <td class="subject3">Python</td>
+        </tr>
+    </table>
+</body>
+
+</html>

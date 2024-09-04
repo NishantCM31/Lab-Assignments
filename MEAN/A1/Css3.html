@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled Link Example</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: url('https://wallpapers.com/images/hd/black-carbon-fiber-35yxtk8m3ebo7623.jpg') no-repeat center center fixed; /* Neutral background image */
+            background-size: cover; /* Cover the entire screen */
+            color: #ffffff; /* White text color for contrast */
+        }
+
+        .styled-link {
+            font-size: 24px;
+            text-align: center;
+            border: 2px solid black;
+            padding: 10px;
+            background: rgba(245, 241, 241, 0.6); /* Darker semi-transparent background for readability */
+            border-radius: 10px; /* Rounded corners for the container */
+        }
+
+        /* Unvisited link */
+        a:link {
+            color: red;
+        }
+
+        /* Visited link */
+        a:visited {
+            color: green;
+        }
+
+        /* Mouse over link */
+        a:hover {
+            color: pink;
+        }
+
+        /* Selected link */
+        a:active {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="styled-link">
+        <a href="https://www.porsche.com/usa/models/911/911-turbo-models/911-turbo-s/">Driven by Dreams</a>
+    </div>
+</body>
+</html>

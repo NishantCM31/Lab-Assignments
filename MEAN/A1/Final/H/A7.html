@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frame Table</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f4f4f4; /* Light background for contrast */
+        }
+        .table-container {
+            width: 90%; /* Adjust width for responsiveness */
+            max-width: 800px; /* Maximum width to prevent it from getting too wide */
+            border: 1px solid #333;
+            padding: 20px;
+            background-color: #fff; /* Background color for the table */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+            text-align: center; /* Center-aligns text inside the container */
+            overflow-x: auto; /* Allows horizontal scrolling if needed */
+        }
+        h1 {
+            margin: 0 0 30px 0; /* Margin below heading */
+            font-size: 24px; /* Font size for heading */
+            color: #333; /* Color of the heading */
+        }
+        table {
+            width: 100%; /* Set the width of the table */
+            border-collapse: collapse;
+            margin: 0 auto; /* Center the table on the screen */
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 12px; /* Increased padding for better readability */
+            text-align: left;
+            vertical-align: top; /* Aligns text to the top of cells with rowspan */
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin: 0;
+        }
+        marquee {
+            display: block;
+            margin: 20px 0; /* Margin around scrolling message */
+            font-style: italic;
+            color: #555;
+       
+        }
+        a {
+            text-decoration: none; /* Remove underline from links */
+            color: blue; /* Change link color to blue */
+        }
+        a:hover {
+            text-decoration: underline; /* Optional: underline on hover for better usability */
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 20px; /* Adjust font size for smaller screens */
+            }
+            th, td {
+                padding: 10px; /* Adjust padding for smaller screens */
+            }
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 18px; /* Further adjust font size for very small screens */
+            }
+            th, td {
+                padding: 8px; /* Further adjust padding for very small screens */
+                font-size: 14px; /* Adjust font size for very small screens */
+            }
+            table {
+                font-size: 14px; /* Adjust font size within the table for very small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="table-container">
+    <h1>Frame Table</h1>
+    <table>
+        <tr>
+            <td><strong>First Frame</strong><br>Nishant C Madke</td>
+            <td colspan="2"><strong>Second Frame</strong><br>A-303 Nivasa Prakriti Lane no 13, Swami Samarth Nagar, Sathe Basti, Kutwal Colony, Lohegaon, Pune, Maharashtra 411047</td>
+        </tr>
+        <tr>
+            <td rowspan="3"><strong>Third Frame</strong><br>
+                <ul>
+                    <li>M.Sc. - Computer Application CGPA(First Year): 9.10</li>
+                    <li>B.Sc. - Computer Application CGPA: 9.55</li>
+                    <li>100 Days of Code: The Complete Python Pro Bootcamp</li>
+                </ul>
+            </td>
+            <td><strong>Fourth Frame</strong><br>
+                <marquee behavior="scroll" direction="left">"The only way to do great work is to love what you do." — Steve Jobs</marquee>
+            </td>
+            <td><strong>Fifth Frame</strong><br>
+                <a href="https://www.porsche.com/middle-east/_india_/" target="_blank">Porsche</a><br>
+                <a href="https://www.mercedes-amg.com/en/home.html" target="_blank">Mercedes-AMG</a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><strong>Sixth Frame</strong><br>
+                <img src="https://files.porsche.com/filestore/image/multimedia/none/911-tus-modelimage-sideshot/model/930894f1-6214-11ea-80c8-005056bbdc38/porsche-model.png" alt="Porsche Image" style="max-width: 100%; height: auto;">
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

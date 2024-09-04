@@ -1,0 +1,39 @@
+/* Container for image and text */
+.image-container {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 10px; /* Optional: Add rounded corners to the image */
+}
+
+/* Ensure the image covers the container */
+.image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Overlay text styling */
+.overlay-text {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.6); /* Slightly darker background */
+  padding: 10px 15px;
+  border-radius: 8px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Adds a subtle shadow for better readability */
+}
+
+/* Responsive text size */
+@media (max-width: 600px) {
+  .overlay-text {
+    font-size: 16px;
+    top: 15px;
+    right: 15px;
+    padding: 8px 12px;
+  }
+}

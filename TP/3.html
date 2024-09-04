@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Book Order</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            background-color: #fff;
+            padding: 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        .book {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+        }
+        .book img {
+            max-width: 150px;
+            border-radius: 8px;
+            margin-right: 20px;
+        }
+        .book-details {
+            flex: 1;
+        }
+        .book-details h3 {
+            margin: 0;
+            color: #007bff;
+            cursor: pointer;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        .book-details h3:hover {
+            color: #0056b3;
+        }
+        .book-details p {
+            margin: 5px 0;
+            color: #555;
+            font-size: 16px;
+        }
+        .book-details .reviews {
+            margin-top: 10px;
+            color: #888;
+            font-size: 14px;
+        }
+        .book-details .topics {
+            display: none;
+            margin-top: 10px;
+            color: #444;
+            font-size: 16px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            color: #555;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+        .order-status {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            color: #28a745;
+        }
+    </style>
+    <script>
+        function toggleTopics(id) {
+            const topics = document.getElementById(id);
+            if (topics.style.display === "none" || topics.style.display === "") {
+                topics.style.display = "block";
+            } else {
+                topics.style.display = "none";
+            }
+        }
+
+        function submitOrder(event) {
+            event.preventDefault();
+            const orderStatus = document.getElementById('order-status');
+            orderStatus.textContent = 'Order Confirmed!';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Order Your Favorite Book</h2>
+        <div class="book">
+            <img src="book.jpg" alt="Book Image">
+            <div class="book-details">
+                <h3 onclick="toggleTopics('topics1')">Java - The Complete Reference 7th Edition</h3>
+                <p>This is a short description of the book. It gives an overview of the content and the main topics covered.</p>
+                <p class="reviews">Reviews: 4.5/5</p>
+                <div class="topics" id="topics1">
+                    <p>Topics Covered:</p>
+                    <ul>
+                        <li>Introduction to the book</li>
+                        <li>Chapter 1: Basics</li>
+                        <li>Chapter 2: Advanced Topics</li>
+                        <li>Conclusion</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Repeat the above block for more books -->
+
+        <form onsubmit="submitOrder(event)">
+            <h2>Customer Information</h2>
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="payment">Payment Method:</label>
+                <select id="payment" name="payment" required>
+                    <option value="">Select Payment Method</option>
+                    <option value="credit_card">Credit Card</option>
+                    <option value="debit_card">Debit Card</option>
+                    <option value="paypal">PayPal</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="copies">Number of Copies:</label>
+                <input type="number" id="copies" name="copies" min="1" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Place Order</button>
+            </div>
+            <div class="order-status" id="order-status"></div>
+        </form>
+    </div>
+</body>
+</html>

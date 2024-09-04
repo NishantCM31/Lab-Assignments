@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="A5.css">
+     
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+   <title>Survey Form</title>
+</head>
+<body>
+    <div class="container">
+        <header>Survey</header>
+
+        <form action="#">
+            <div class="form first">
+                <div class="details personal">
+                    <span class="title">Personal Information</span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>Full Name</label>
+                            <input type="text" placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Age</label>
+                            <input type="number" placeholder="Enter your age" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Gender</label>
+                            <select required>
+                                <option disabled selected>Select gender</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Non-binary</option>
+                                <option>Prefer not to say</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Occupation</label>
+                            <input type="text" placeholder="Enter your occupation" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="details preferences">
+                    <span class="title">Preferences</span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>How often do you use our service?</label>
+                            <select required>
+                                <option disabled selected>Select frequency</option>
+                                <option>Daily</option>
+                                <option>Weekly</option>
+                                <option>Monthly</option>
+                                <option>Rarely</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Rate our service (1-5)</label>
+                            <input type="number" min="1" max="5" placeholder="Enter rating" required>
+                        </div>
+
+                        <!-- <div class="input-field">
+                            <label>What features do you like the most?</label>
+                            <input type="text" placeholder="Enter features" required>
+                        </div> -->
+                    </div>
+
+                    <button class="nextBtn">
+                        <span class="btnText">Next</span>
+                        <i class="uil uil-navigator"></i>
+                    </button>
+                </div> 
+            </div>
+
+            <div class="form second">
+                <div class="details feedback">
+                    <span class="title">Feedback</span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>What improvements would you suggest?</label>
+                            <textarea placeholder="Enter your suggestions" required></textarea>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Any additional comments?</label>
+                            <textarea placeholder="Enter additional comments" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="buttons">
+                        <div class="backBtn">
+                            <i class="uil uil-navigator"></i>
+                            <span class="btnText">Back</span>
+                        </div>
+                        
+                        <button class="submit">
+                            <span class="btnText">Submit</span>
+                            <i class="uil uil-navigator"></i>
+                        </button>
+                    </div>
+                </div> 
+            </div>
+        </form>
+    </div>
+
+    <script src="A5.js"></script>
+</body>
+</html>

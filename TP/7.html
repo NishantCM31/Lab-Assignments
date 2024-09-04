@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Multi-Frame Layout</title>
+<style>
+body {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.frame {
+    border: 1px solid black;
+    flex: 1 0 auto;
+    height: 200px;
+    margin: 10px;
+}
+
+.first-frame {
+    width: 25%;
+}
+
+.second-frame {
+    width: 25%;
+}
+
+.third-frame, .fourth-frame, .fifth-frame {
+    width: 33.33%;
+}
+
+.sixth-frame {
+    width: 100%;
+}
+</style>
+</head>
+<body>
+
+<div class="frame first-frame">
+    <h2>First Frame</h2>
+    <p>Name</p>
+</div>
+
+<div class="frame second-frame">
+    <h2>Second Frame</h2>
+    <p>Address</p>
+</div>
+
+<div class="frame third-frame">
+    <h2>Third Frame</h2>
+    <ul>
+        <li>Qualification 1</li>
+        <li>Qualification 2</li>
+        <li>Qualification 3</li>
+    </ul>
+</div>
+
+<div class="frame fourth-frame">
+    <h2>Forth Frame</h2>
+    <p>Scrolling message</p>
+</div>
+
+<div class="frame fifth-frame">
+    <h2>Fifth Frame</h2>
+    <ul>
+        <li><a href="http://www.example.com">Favorite Site 1</a></li>
+        <li><a href="http://www.example.com">Favorite Site 2</a></li>
+        <li><a href="http://www.example.com">Favorite Site 3</a></li>
+    </ul>
+</div>
+
+<div class="frame sixth-frame">
+    <h2>Sixth Frame</h2>
+    <img src="img2.jpg" alt="Image">
+</div>
+
+</body>
+</html>

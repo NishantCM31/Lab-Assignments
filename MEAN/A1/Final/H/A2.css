@@ -1,42 +1,3 @@
-/* body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-  }
-  
-  h1 {
-    text-align: center;
-    color: #00698f;
-  }
-  
-  table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  
-  th, td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #f0f0f0;
-    color: #333;
-    font-weight: bold;
-  }
-  
-  td {
-    background-color: #fff;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  tr:hover {
-    background-color: #f2f2f2;
-  } */
 
   body {
     font-family: Arial, sans-serif;
@@ -65,7 +26,7 @@ th {
     color: #333;
     font-weight: bold;
 }
-
+    
 td {
     background-color: #fff;
 }
