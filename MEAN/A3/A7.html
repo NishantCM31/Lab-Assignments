@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Home Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-app="businessApp" ng-controller="businessController">
+
+    <h1>Business Home Page</h1>
+    <nav>
+        <ul>
+            <li><a href="#" ng-click="page = 'home'">Home</a></li>
+            <li><a href="#" ng-click="page = 'policies'">Policies</a></li>
+            <li><a href="#" ng-click="page = 'about'">About Us</a></li>
+        </ul>
+    </nav>
+
+    <div ng-show="page === 'home'">
+        <h2>Welcome to Our Business</h2>
+        <p>This is the home page of our business.</p>
+    </div>
+
+    <div ng-show="page === 'policies'">
+        <h2>Our Policies</h2>
+        <p>Here are our business policies.</p>
+    </div>
+
+    <div ng-show="page === 'about'">
+        <h2>About Us</h2>
+        <p>Information about our business.</p>
+    </div>
+
+    <script>
+        var app = angular.module('businessApp', []);
+        app.controller('businessController', function($scope) {
+            $scope.page = 'home';  // Default page
+        });
+    </script>
+
+</body>
+</html>

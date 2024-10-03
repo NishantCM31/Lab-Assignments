@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-app="registrationApp" ng-controller="registrationController">
+
+    <h1>User Registration Form</h1>
+
+    <form>
+        <label>User ID: </label><input type="text" ng-model="user.userId" required><br>
+        <label>Name: </label><input type="text" ng-model="user.name" required><br>
+        <label>Address: </label><input type="text" ng-model="user.address"><br>
+        <label>Department: </label>
+        <select ng-model="user.department">
+            <option value="CS">Computer Science</option>
+            <option value="EE">Electrical Engineering</option>
+        </select><br>
+        <label>Course: </label>
+        <select ng-model="user.course">
+            <option value="BTech">B.Tech</option>
+            <option value="MTech">M.Tech</option>
+        </select><br>
+    </form>
+
+    <h3>Registered Users:</h3>
+    <table border="1">
+        <tr>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Department</th>
+            <th>Course</th>
+        </tr>
+        <tr ng-repeat="user in users">
+            <td>{{ user.userId }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.address }}</td>
+            <td>{{ user.department }}</td>
+            <td>{{ user.course }}</td>
+        </tr>
+    </table>
+
+    <script>
+        var app = angular.module('registrationApp', []);
+        app.controller('registrationController', function($scope) {
+            $scope.users = [
+                { userId: '001', name: 'Alice', address: 'City A', department: 'CS', course: 'BTech' },
+                { userId: '002', name: 'Bob', address: 'City B', department: 'EE', course: 'MTech' },
+                { userId: '003', name: 'Charlie', address: 'City C', department: 'CS', course: 'BTech' }
+            ];
+        });
+    </script>
+
+</body>
+</html>

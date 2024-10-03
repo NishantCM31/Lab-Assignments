@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-app="currencyApp" ng-controller="currencyController">
+
+    <div class="container">
+        <h1>Currency Converter: INR to USD & EUR</h1>
+
+        <label for="inr">Enter Amount in INR:</label>
+        <input type="number" id="inr" ng-model="inrAmount" placeholder="Enter INR amount">
+
+        <h3>Converted Values:</h3>
+        <p><strong>USD: </strong>{{ inrAmount * usdRate | currency: '$' }}</p>
+        <p><strong>EUR: </strong>{{ inrAmount * eurRate | currency: '€' }}</p>
+    </div>
+
+    <script>
+        // Define AngularJS Application
+        var app = angular.module('currencyApp', []);
+
+        // Create Controller
+        app.controller('currencyController', function($scope) {
+            // Conversion rates
+            $scope.usdRate = 0.012; // 1 INR = 0.012 USD
+            $scope.eurRate = 0.011; // 1 INR = 0.011 EUR
+        });
+    </script>
+
+</body>
+</html>

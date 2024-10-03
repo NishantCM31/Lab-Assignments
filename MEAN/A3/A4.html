@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-app="cartApp" ng-controller="cartController">
+
+    <h1>Shopping Cart</h1>
+    
+    <form>
+        <label for="item">Item Name:</label>
+        <input type="text" id="item" ng-model="cart.item">
+
+        <h3>Delivery Option:</h3>
+        <label><input type="radio" ng-model="cart.delivery" value="Standard"> Standard</label>
+        <label><input type="radio" ng-model="cart.delivery" value="Express"> Express</label>
+
+        <h3>Quantity:</h3>
+        <select ng-model="cart.quantity">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+
+        <p><strong>Order Summary:</strong> Item: {{ cart.item }}, Delivery: {{ cart.delivery }}, Quantity: {{ cart.quantity }}</p>
+    </form>
+
+    <script>
+        var app = angular.module('cartApp', []);
+        app.controller('cartController', function($scope) {
+            $scope.cart = {};
+        });
+    </script>
+
+</body>
+</html>
