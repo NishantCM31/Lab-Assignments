@@ -3,20 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Currency Converter</title>
+    <title>Currency Converter: INR to USD & EUR</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AngularJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: url("https://www.transparenttextures.com/patterns/diagmonds-light.png"), linear-gradient(135deg, #6F73FF, #9D54F8);
+            background-size: cover;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            width: 370px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 600;
+            color: rgb(14, 1, 1);
+            margin-bottom: 20px;
+        }
+
+        label, p, h3 {
+            font-size: 18px;
+            color: rgb(0, 0, 0);
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 7px;
+            font-size: 17px;
+            background: rgba(255, 255, 255, 0.2);
+            color: rgb(19, 1, 1);
+        }
+
+        input:focus {
+            border: 2px solid #675AFE;
+            outline: none;
+        }
+
+        .exchange-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .select-box {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 7px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .select-box img {
+            width: 30px;
+            margin-right: 10px;
+        }
+
+        .icon {
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .converted-values {
+            margin-top: 20px;
+            color: white;
+        }
+
+        .converted-values p {
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body ng-app="currencyApp" ng-controller="currencyController">
-
     <div class="container">
         <h1>Currency Converter: INR to USD & EUR</h1>
 
         <label for="inr">Enter Amount in INR:</label>
-        <input type="number" id="inr" ng-model="inrAmount" placeholder="Enter INR amount">
+        <input type="number" id="inr" ng-model="inrAmount" placeholder="Enter INR amount" ng-change="validateAmount()">
 
-        <h3>Converted Values:</h3>
-        <p><strong>USD: </strong>{{ inrAmount * usdRate | currency: '$' }}</p>
-        <p><strong>EUR: </strong>{{ inrAmount * eurRate | currency: '€' }}</p>
+        <div class="exchange-section">
+            <div class="select-box">
+                <img src="https://flagcdn.com/48x36/in.png" alt="INR flag">
+                <p>INR</p>
+            </div>
+            <i class="fas fa-exchange-alt icon"></i>
+            <div class="select-box">
+                <img src="https://flagcdn.com/48x36/us.png" alt="USD flag">
+                <p>USD & EUR</p>
+            </div>
+        </div>
+
+        <div class="converted-values">
+            <h3>Converted Values:</h3>
+            <p><strong>USD: </strong>{{ inrAmount * usdRate | currency: '$' }}</p>
+            <p><strong>EUR: </strong>{{ inrAmount * eurRate | currency: '€' }}</p>
+        </div>
     </div>
 
     <script>
@@ -28,8 +139,14 @@
             // Conversion rates
             $scope.usdRate = 0.012; // 1 INR = 0.012 USD
             $scope.eurRate = 0.011; // 1 INR = 0.011 EUR
+
+            // Validate the input to prevent negative values
+            $scope.validateAmount = function() {
+                if ($scope.inrAmount < 0) {
+                    $scope.inrAmount = 0;  // Reset to 0 if negative
+                }
+            };
         });
     </script>
-
 </body>
 </html>

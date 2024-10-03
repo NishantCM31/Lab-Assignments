@@ -1,36 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Data</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:600|Open+Sans:400,700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .container {
+            display: flex;
+            width: 80%;
+            max-width: 1200px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .form-container {
+            padding: 20px;
+            width: 50%;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 1px solid #ddd; /* Border for the table */
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: center; /* Centering text in cells */
+            border: 1px solid #ddd; /* Border for each cell */
+        }
+
+        th {
+            background-color: #1DA1F2;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #e0f7fa; /* Light blue on hover */
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #1DA1F2;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #0d8bd9;
+        }
+
+        .results-container {
+            width: 50%;
+            padding: 20px;
+            overflow-y: auto; /* Allow scrolling if necessary */
+        }
+    </style>
 </head>
+
 <body ng-app="studentApp" ng-controller="studentController">
 
-    <h1>Student Data</h1>
+    <div class="container">
+        <div class="form-container">
+            <h1>Student Data</h1>
+            <input type="text" ng-model="newStudent.name" placeholder="Enter student name" required>
+            <input type="number" ng-model="newStudent.marks" placeholder="Enter marks" min="0" required>
+            <button ng-click="addStudent()">Add Student</button>
+        </div>
 
-    <table border="1">
-        <tr>
-            <th>Name</th>
-            <th>Marks</th>
-        </tr>
-        <tr ng-repeat="student in students">
-            <td>{{ student.name }}</td>
-            <td>{{ student.marks }}</td>
-        </tr>
-    </table>
+        <div class="results-container">
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Marks</th>
+                </tr>
+                <tr ng-repeat="student in students">
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.marks }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
     <script>
         var app = angular.module('studentApp', []);
         app.controller('studentController', function($scope) {
-            $scope.students = [
-                { name: 'John', marks: 85 },
-                { name: 'Emma', marks: 90 },
-                { name: 'Chris', marks: 78 }
-            ];
+            $scope.students = [];
+
+            $scope.newStudent = {
+                name: '',
+                marks: ''
+            };
+
+            $scope.addStudent = function() {
+                if ($scope.newStudent.name && $scope.newStudent.marks >= 0) {
+                    $scope.students.push({
+                        name: $scope.newStudent.name,
+                        marks: $scope.newStudent.marks
+                    });
+                    // Reset input fields
+                    $scope.newStudent.name = '';
+                    $scope.newStudent.marks = '';
+                } else {
+                    alert('Please fill in valid student name and marks!');
+                }
+            };
         });
     </script>
 
 </body>
+
 </html>

@@ -3,36 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Home Page</title>
+    <title>AngularJS Business Home Page</title>
+    <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <!-- Google Fonts Links For Icon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
 </head>
 <body ng-app="businessApp" ng-controller="businessController">
 
-    <h1>Business Home Page</h1>
-    <nav>
-        <ul>
-            <li><a href="#" ng-click="page = 'home'">Home</a></li>
-            <li><a href="#" ng-click="page = 'policies'">Policies</a></li>
-            <li><a href="#" ng-click="page = 'about'">About Us</a></li>
-        </ul>
-    </nav>
+    <header>
+        <nav class="navbar">
+            <a class="logo" href="#">AngularJS<span>.</span></a>
+            <ul class="menu-links">
+                <span id="close-menu-btn" class="material-symbols-outlined">close</span>
+                <li><a href="#" ng-click="page = 'home'">Home</a></li>
+                <li><a href="#" ng-click="page = 'policies'">Policies</a></li>
+                <li><a href="#" ng-click="page = 'about'">About Us</a></li>
+            </ul>
+            <span id="hamburger-btn" class="material-symbols-outlined">menu</span>
+        </nav>
+    </header>
 
-    <div ng-show="page === 'home'">
-        <h2>Welcome to Our Business</h2>
-        <p>This is the home page of our business.</p>
-    </div>
+    <section class="hero-section">
+        <div class="content">
 
-    <div ng-show="page === 'policies'">
-        <h2>Our Policies</h2>
-        <p>Here are our business policies.</p>
-    </div>
+            <!-- Static Content (This will not move) -->
+            <div class="static-content">
+                <h2>Empower Your Development with AngularJS</h2>
+              
+            </div>
 
-    <div ng-show="page === 'about'">
-        <h2>About Us</h2>
-        <p>Information about our business.</p>
-    </div>
+            <!-- Dynamic Content -->
+            <div class="dynamic-content" ng-switch="page">
+                <div ng-switch-when="home">
+                    <h3>Welcome to AngularJS</h3>
+                    <p>
+                        AngularJS is a structural framework for dynamic web apps. It lets you use HTML as your template language
+                        and extend HTML’s syntax to express your application’s components clearly and succinctly.
+                    </p>
+                    <p>
+                        With AngularJS, you can build single-page applications with a smooth user experience, 
+                        ensuring that your users remain engaged and productive.
+                    </p>
+                </div>
+
+                <div ng-switch-when="policies">
+                    <h3>Our Policies</h3>
+                    <p>
+                        We prioritize the privacy and security of our users. Our policies ensure that your data remains 
+                        confidential and is only used to enhance your experience with AngularJS applications.
+                    </p>
+                    <p>
+                        We also encourage contributions to our open-source community, ensuring that the framework continues 
+                        to evolve and meet the needs of developers worldwide.
+                    </p>
+                </div>
+
+                <div ng-switch-when="about">
+                    <h3>About Us</h3>
+                    <p>
+                        We are a community of developers passionate about using AngularJS to create amazing web applications.
+                        Our mission is to empower developers with the tools and knowledge to harness the full potential 
+                        of AngularJS in their projects.
+                    </p>
+                    <p>
+                        With a strong focus on best practices and community engagement, we strive to make AngularJS accessible 
+                        to everyone, regardless of their experience level.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
 
     <script>
+        const header = document.querySelector("header");
+        const hamburgerBtn = document.querySelector("#hamburger-btn");
+        const closeMenuBtn = document.querySelector("#close-menu-btn");
+
+        // Toggle mobile menu on hamburger button click
+        hamburgerBtn.addEventListener("click", () => header.classList.toggle("show-mobile-menu"));
+
+        // Close mobile menu on close button click
+        closeMenuBtn.addEventListener("click", () => hamburgerBtn.click());
+
+        // AngularJS app
         var app = angular.module('businessApp', []);
         app.controller('businessController', function($scope) {
             $scope.page = 'home';  // Default page

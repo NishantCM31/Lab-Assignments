@@ -5,15 +5,129 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Concatenate Strings</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:600|Noto+Sans|Open+Sans:400,700&display=swap');
+        * {
+          margin: 0;
+          padding: 0;
+          border-radius: 5px;
+          box-sizing: border-box;
+        }
+        body {
+          height: 100vh;
+          display: flex;
+          align-items: center;
+          text-align: center;
+          font-family: 'Open Sans', sans-serif;
+          justify-content: center;
+          background: url('bg.jpg') no-repeat center center/cover;
+        }
+        .container {
+          position: relative;
+          width: 400px;
+          background: white;
+          padding: 60px 40px;
+          border-radius: 10px;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        header {
+          font-size: 30px;
+          margin-bottom: 40px;
+          font-family: 'Montserrat', sans-serif;
+          color: #1DA1F2;
+        }
+        .input-field {
+          margin: 25px 0;
+          position: relative;
+          height: 50px;
+          width: 100%;
+        }
+        .input-field input {
+          height: 100%;
+          width: 100%;
+          border: 1px solid silver;
+          padding-left: 15px;
+          outline: none;
+          font-size: 19px;
+          transition: .4s;
+        }
+        input:focus {
+          border: 1px solid #1DA1F2;
+        }
+        .input-field label {
+          position: absolute;
+          top: 50%;
+          left: 15px;
+          transform: translateY(-50%);
+          pointer-events: none;
+          color: grey;
+          font-size: 18px;
+          transition: .4s;
+        }
+        input:focus ~ label,
+        input:valid ~ label {
+          transform: translateY(-33px);
+          background: white;
+          font-size: 16px;
+          color: #1DA1F2;
+        }
+        .button {
+          margin-top: 30px;
+          overflow: hidden;
+          position: relative;
+          height: 50px;
+          width: 100%;
+        }
+        .button .inner {
+          position: absolute;
+          height: 100%;
+          width: 300%;
+          left: -100%;
+          transition: all .4s;
+          background: linear-gradient(90deg, #00dbde, #fc00ff, #00dbde);
+        }
+        .button:hover .inner {
+          left: 0;
+        }
+        .button button {
+          width: 100%;
+          height: 100%;
+          border: none;
+          background: none;
+          outline: none;
+          color: white;
+          font-size: 20px;
+          cursor: pointer;
+          font-family: 'Montserrat', sans-serif;
+        }
+        .output {
+          margin-top: 30px;
+          font-size: 20px;
+          color: grey;
+        }
+    </style>
 </head>
 <body ng-app="stringApp" ng-controller="stringController">
 
-    <h1>Concatenate Two Strings</h1>
+    <div class="container">
+        <header>Concatenate Strings</header>
 
-    <input type="text" ng-model="string1" placeholder="Enter first string">
-    <input type="text" ng-model="string2" placeholder="Enter second string">
+        <div class="input-field">
+            <input type="text" id="string1" ng-model="string1"  required>
+            <label for="string1">First String</label>
+        </div>
 
-    <p><strong>Concatenated String:</strong> {{ string1 + ' ' + string2 }}</p>
+        <div class="input-field">
+            <input type="text" id="string2" ng-model="string2"  required>
+            <label for="string2">Second String</label>
+        </div>
+
+        
+
+        <div class="output">
+            <strong>Concatenated String: </strong> <br>{{ string1 + ' ' + string2 }}
+        </div>
+    </div>
 
     <script>
         var app = angular.module('stringApp', []);
