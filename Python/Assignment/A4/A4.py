@@ -1,59 +1,82 @@
-""" import numpy as np
-
-# Example stock prices (4 stocks over 10 days)
-stock_prices = np.array([
-    [100, 102, 101, 105, 104, 106, 107, 109, 108, 110],
-    [50, 52, 51, 55, 54, 53, 56, 57, 56, 59],
-    [200, 202, 204, 205, 206, 209, 208, 210, 212, 213],
-    [150, 148, 149, 152, 151, 154, 155, 157, 156, 158]
-])
-
-# 1. Calculate the daily percentage change for each stock
-daily_pct_change = np.diff(stock_prices, axis=1) / stock_prices[:, :-1] * 100
-print("Daily percentage change:\n", daily_pct_change)
-
-# 2. Identify the stock with the highest volatility (variance in daily returns)
-volatility = np.var(daily_pct_change, axis=1)
-most_volatile_stock = np.argmax(volatility)
-print("Most volatile stock:", most_volatile_stock)
-
-# 3. Determine the best-performing stock over the 10-day period
-best_performing_stock = np.argmax(stock_prices[:, -1] - stock_prices[:, 0])
-print("Best performing stock:", best_performing_stock)
-
-# 4. Find the days where any stock price dropped more than 5% from the previous day
-drop_days = np.where(np.diff(stock_prices, axis=1) / stock_prices[:, :-1] < -0.05)
-print("Days where any stock price dropped more than 5%:", drop_days)
- """
-
 import numpy as np
 
-# Updated example stock prices (4 stocks over 10 days)
-stock_prices = np.array([
-    [100, 105, 103, 110, 108, 115, 117, 120, 119, 125],  # Stock 1
-    [50, 55, 52, 57, 54, 53, 60, 63, 62, 65],           # Stock 2
-    [200, 205, 204, 210, 215, 220, 225, 223, 230, 235], # Stock 3
-    [150, 148, 140, 150, 145, 144, 155, 160, 158, 170]  # Stock 4
-])
+def get_stock_prices():
+    prices = []
+    for i in range(4):  # For 4 stocks
+        stock_price = []
+        print(f"\nEnter prices for Stock {i + 1} for 10 days:")
+        for j in range(10):  # 10 days
+            price = float(input(f"Day {j + 1}: "))
+            stock_price.append(price)
+        prices.append(stock_price)
+    return np.array(prices)
 
-# 1. Calculate the daily percentage change for each stock
-daily_pct_change = np.diff(stock_prices, axis=1) / stock_prices[:, :-1] * 100
-print("Daily Percentage Change for Each Stock:")
-for i, changes in enumerate(daily_pct_change):
-    print(f"Stock {i + 1}: {changes.round(2)}%")
+def daily_percentage_change(prices):
+    return np.diff(prices) / prices[:, :-1] * 100
 
-# 2. Identify the stock with the highest volatility (variance in daily returns)
-volatility = np.var(daily_pct_change, axis=1)
-most_volatile_stock = np.argmax(volatility)
-print(f"\nMost Volatile Stock: Stock {most_volatile_stock + 1} (Variance: {volatility[most_volatile_stock]:.2f})")
+def calculate_volatility(daily_changes):
+    return np.var(daily_changes, axis=1)
 
-# 3. Determine the best-performing stock over the 10-day period
-price_difference = stock_prices[:, -1] - stock_prices[:, 0]
-best_performing_stock = np.argmax(price_difference)
-print(f"\nBest Performing Stock: Stock {best_performing_stock + 1} (Price Increase: {price_difference[best_performing_stock]})")
+def best_performing_stock(prices):
+    return np.argmax(np.sum(prices[:, 1:] - prices[:, :-1], axis=1))
 
-# 4. Find the days where any stock price dropped more than 5% from the previous day
-drop_days = np.where(np.diff(stock_prices, axis=1) / stock_prices[:, :-1] < -0.05)
-print("\nDays Where Any Stock Price Dropped More Than 5%:")
-for stock, day in zip(drop_days[0], drop_days[1]):
-    print(f"Stock {stock + 1} on Day {day + 2}")
+def find_drops(prices):
+    drops = []
+    for i in range(4):  # For 4 stocks
+        for j in range(1, 10):  # From day 2 to day 10
+            if prices[i][j] < prices[i][j - 1] * 0.95:
+                drops.append((i + 1, j + 1))
+    return drops    
+
+def print_daily_changes(changes):
+    print("\nDaily Percentage Change:")
+    print("{:<10} {:<10} {:<10} {:<10} {:<10}".format("Day", "Stock 1", "Stock 2", "Stock 3", "Stock 4"))
+    for day in range(9):  # Only 9 changes
+        print("{:<10} {:<10.2f} {:<10.2f} {:<10.2f} {:<10.2f}".format(day + 2, 
+              changes[0][day], changes[1][day], changes[2][day], changes[3][day]))
+
+def main():
+    prices = get_stock_prices()
+
+    while True:
+        print("\nMenu:")
+        print("1. Calculate daily percentage change for each stock")
+        print("2. Identify the stock with the highest volatility")
+        print("3. Determine the best-performing stock")
+        print("4. Find the days where any stock dropped more than 5%")
+        print("5. Exit")
+        
+        choice = int(input("Enter your choice: "))
+        
+        if choice == 1:
+            changes = daily_percentage_change(prices)
+            print_daily_changes(changes)
+        
+        elif choice == 2:
+            changes = daily_percentage_change(prices)
+            volatility = calculate_volatility(changes)
+            highest_volatility_stock = np.argmax(volatility) + 1
+            print(f"\nStock with the highest volatility: Stock {highest_volatility_stock} (Variance: {volatility[highest_volatility_stock - 1]:.2f})")
+        
+        elif choice == 3:
+            best_stock = best_performing_stock(prices)
+            print(f"\nBest performing stock over 10 days: Stock {best_stock + 1}")
+        
+        elif choice == 4:
+            drops = find_drops(prices)
+            if drops:
+                print("\nDays where stock dropped more than 5%:")
+                for stock, day in drops:
+                    print(f"Stock {stock} dropped on Day {day}")
+            else:
+                print("\nNo significant drops found.")
+        
+        elif choice == 5:
+            print("Exiting the program.")
+            break
+        
+        else:
+            print("\nInvalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()

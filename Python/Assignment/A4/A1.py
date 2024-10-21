@@ -1,66 +1,92 @@
-""" import numpy as np
-
-# Example temperature data (5 cities over 7 days)
-temperatures = np.array([
-    [30, 32, 34, 33, 31, 35, 36],
-    [29, 31, 33, 34, 32, 36, 38],
-    [28, 29, 32, 31, 30, 34, 33],
-    [25, 27, 29, 30, 28, 31, 32],
-    [20, 22, 24, 26, 25, 23, 27]
-])
-
-# 1. Average temperature per city
-avg_temp_per_city = np.mean(temperatures, axis=1)
-print("Average temperature per city:", avg_temp_per_city)
-
-# 2. Hottest day overall and in each city
-hottest_day_each_city = np.max(temperatures, axis=1)
-hottest_day_overall = np.max(temperatures)
-print("Hottest day in each city:", hottest_day_each_city)
-print("Hottest day overall:", hottest_day_overall)
-
-# 3. City with the highest average temperature
-highest_avg_city_index = np.argmax(avg_temp_per_city)
-print("City with the highest average temperature:", highest_avg_city_index)
-
-# 4. Days where the temperature exceeded 35°C in any city
-days_exceeded_35 = np.where(temperatures > 35)
-print("Days where temperature exceeded 35°C:", days_exceeded_35)
- """
-
-
 import numpy as np
 
-# Example temperature data (5 cities over 7 days)
-temperatures = np.array([
-    [30, 32, 34, 33, 31, 35, 36],
-    [29, 31, 33, 34, 32, 36, 38],
-    [28, 29, 32, 31, 30, 34, 33],
-    [25, 27, 29, 30, 28, 31, 32],
-    [20, 22, 24, 26, 25, 23, 27]
-])
+def input_temperature_data():
+    cities = []
+    for i in range(5):
+        city_name = input(f"Enter the name of city {i + 1}: ")
+        cities.append(city_name)
+    
+    temperature_data = []
+    for city in cities:
+        while True:
+            print(f"Enter the temperatures for {city} over 7 days (space-separated): ")
+            temperatures = list(map(float, input().split()))
+            if len(temperatures) == 7:
+                temperature_data.append(temperatures)
+                break
+            else:
+                print("Please enter exactly 7 temperature readings.")
+    
+    return cities, np.array(temperature_data)
 
-# City names for reference
-cities = ["City A", "City B", "City C", "City D", "City E"]
+def calculate_average_temperature(temperature_data):
+    return np.mean(temperature_data, axis=1)
 
-# 1. Average temperature per city
-avg_temp_per_city = np.mean(temperatures, axis=1)
-for i, avg in enumerate(avg_temp_per_city):
-    print(f"Average temperature in {cities[i]}: {avg:.2f}°C")
+def find_hottest_day_overall(temperature_data):
+    return np.max(temperature_data)
 
-# 2. Hottest day in each city and overall
-hottest_day_each_city = np.max(temperatures, axis=1)
-hottest_day_overall = np.max(temperatures)
-for i, temp in enumerate(hottest_day_each_city):
-    print(f"Hottest day in {cities[i]}: {temp}°C")
-print(f"Hottest day overall: {hottest_day_overall}°C")
+def find_hottest_day_per_city(temperature_data):
+    return np.max(temperature_data, axis=1)
 
-# 3. City with the highest average temperature
-highest_avg_city_index = np.argmax(avg_temp_per_city)
-print(f"City with the highest average temperature: {cities[highest_avg_city_index]}")
+def identify_city_with_highest_average(average_temperatures, cities):
+    max_avg_index = np.argmax(average_temperatures)
+    return cities[max_avg_index], average_temperatures[max_avg_index]
 
-# 4. Days where the temperature exceeded 35°C in any city
-days_exceeded_35 = np.where(temperatures > 35)
-print("Days where temperature exceeded 35°C:")
-for city_idx, day_idx in zip(days_exceeded_35[0], days_exceeded_35[1]):
-    print(f"- {cities[city_idx]} on Day {day_idx + 1} with {temperatures[city_idx, day_idx]}°C")
+def identify_days_above_threshold(temperature_data, threshold=35):
+    days_exceeding_threshold = []
+    for day in range(7):
+        if any(temperature_data[:, day] > threshold):
+            days_exceeding_threshold.append(day + 1) 
+    return days_exceeding_threshold
+
+def main():
+    print("Welcome to the Climate Data Analysis Program")
+    
+    cities, temperature_data = input_temperature_data()
+    
+    while True:
+        print("\nMenu:")
+        print("1. Calculate average temperature per city")
+        print("2. Find the hottest day overall")
+        print("3. Find the hottest day in each city")
+        print("4. Identify the city with the highest average temperature")
+        print("5. Identify days where temperature exceeded 35°C")
+        print("6. Exit")
+        
+        choice = int(input("Enter your choice: "))
+        
+        if choice == 1:
+            avg_temps = calculate_average_temperature(temperature_data)
+            for i, city in enumerate(cities):
+                print(f"Average temperature for {city}: {avg_temps[i]:.2f}°C")
+        
+        elif choice == 2:
+            hottest_overall = find_hottest_day_overall(temperature_data)
+            print(f"Hottest temperature overall: {hottest_overall:.2f}°C")
+        
+        elif choice == 3:
+            hottest_per_city = find_hottest_day_per_city(temperature_data)
+            for i, city in enumerate(cities):
+                print(f"Hottest day for {city}: {hottest_per_city[i]:.2f}°C")
+        
+        elif choice == 4:
+            avg_temps = calculate_average_temperature(temperature_data)
+            city, highest_avg = identify_city_with_highest_average(avg_temps, cities)
+            print(f"City with highest average temperature: {city} ({highest_avg:.2f}°C)")
+        
+        elif choice == 5:
+            days = identify_days_above_threshold(temperature_data)
+            if days:
+                print(f"Days where temperature exceeded 35°C: {', '.join(map(str, days))}")
+            else:
+                print("No days exceeded 35°C.")
+        
+        elif choice == 6:
+            print("Exiting the program.")
+            break
+        
+        else:
+            print("Invalid choice! Please try again.")
+
+
+main()

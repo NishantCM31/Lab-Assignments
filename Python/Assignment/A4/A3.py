@@ -1,62 +1,78 @@
-""" import numpy as np
-
-# Example DNA sequence (A, T, C, G)
-dna_sequence = np.array(['A', 'T', 'C', 'G', 'A', 'A', 'T', 'G', 'C', 'C', 'A', 'T', 'G'])
-
-# 1. Count frequency of each base (A, T, C, G)
-bases, counts = np.unique(dna_sequence, return_counts=True)
-print("Base counts:", dict(zip(bases, counts)))
-
-# 2. Find the most common base
-most_common_base = bases[np.argmax(counts)]
-print("Most common base:", most_common_base)
-
-# 3. Find base pair sequences longer than a threshold (e.g., 2)
-threshold = 2
-sequences = [sequence for sequence in np.split(dna_sequence, np.where(np.diff(dna_sequence) != 0)[0] + 1) if len(sequence) > threshold]
-print("Long base sequences:", sequences)
-
-# 4. Reverse the DNA sequence
-reversed_dna = np.flip(dna_sequence)
-print("Reversed DNA sequence:", reversed_dna)
- """
-
 import numpy as np
 
-# Example DNA sequence (A, T, C, G)
-dna_sequence = np.array(['A', 'T', 'C', 'G', 'A', 'A', 'A','T', 'G', 'C', 'C', 'A', 'T', 'G'])
+# Function to count the frequency of each base
+def count_bases(dna_sequence):
+    unique, counts = np.unique(dna_sequence, return_counts=True)
+    # Convert NumPy data types to standard Python types
+    return {str(base): int(count) for base, count in zip(unique, counts)}
 
-# 1. Count frequency of each base (A, T, C, G)
-bases, counts = np.unique(dna_sequence, return_counts=True)
-base_counts = dict(zip(bases, counts))
-print("Base Counts:")
-for base, count in base_counts.items():
-    print(f"- {base}: {count}")
+# Function to find the most common base
+def most_common_base(dna_sequence):
+    base_counts = count_bases(dna_sequence)
+    return max(base_counts, key=base_counts.get)
 
-# 2. Find the most common base
-most_common_base = bases[np.argmax(counts)]
-print(f"\nMost Common Base: {most_common_base}")
+# Function to find base pair sequences longer than a specified threshold
+def find_long_sequences(dna_sequence, threshold):
+    current_seq = ''
+    sequences = []
+    for base in dna_sequence:
+        if current_seq and base == current_seq[-1]:
+            current_seq += base
+        else:
+            if len(current_seq) > threshold:
+                sequences.append(current_seq)
+            current_seq = base
+    if len(current_seq) > threshold:  # Add the last sequence if it exceeds the threshold
+        sequences.append(current_seq)
+    return sequences
 
-# 3. Find base pair sequences longer than a threshold (e.g., 2)
-threshold = 2
-# Identify sequences where base stays the same and split based on changes
-sequences = []
-current_sequence = [dna_sequence[0]]
-for i in range(1, len(dna_sequence)):
-    if dna_sequence[i] == dna_sequence[i-1]:
-        current_sequence.append(dna_sequence[i])
-    else:
-        if len(current_sequence) > threshold:
-            sequences.append(current_sequence)
-        current_sequence = [dna_sequence[i]]
-if len(current_sequence) > threshold:
-    sequences.append(current_sequence)
+# Function to reverse the DNA sequence
+def reverse_sequence(dna_sequence):
+    return dna_sequence[::-1]
 
-print(f"\nBase Sequences Longer than {threshold}:")
-for seq in sequences:
-    print(f"- {''.join(seq)}")
+# Function to validate the DNA sequence input
+def is_valid_dna_sequence(dna_sequence):
+    valid_bases = {'A', 'T', 'C', 'G'}
+    return all(base in valid_bases for base in dna_sequence)
 
-# 4. Reverse the DNA sequence
-reversed_dna = np.flip(dna_sequence)
-print("\nReversed DNA Sequence:")
-print(''.join(reversed_dna))
+# Menu-driven program
+def genomic_data_menu():
+    while True:
+        dna_sequence_input = input("Enter the DNA sequence (A, T, C, G): ").upper()
+        if is_valid_dna_sequence(dna_sequence_input):
+            dna_sequence = np.array(list(dna_sequence_input))
+            break
+        else:
+            print("Invalid sequence. Please enter only A, T, C, G.")
+
+    while True:
+        print("\nMenu:")
+        print("1. Count the frequency of each base (A, T, C, G)")
+        print("2. Find the most common base")
+        print("3. Find base pair sequences longer than a specified threshold")
+        print("4. Reverse the entire DNA sequence")
+        print("5. Exit")
+
+        choice = int(input("Enter your choice: "))
+
+        if choice == 1:
+            frequencies = count_bases(dna_sequence)
+            print("Base frequencies:", frequencies)
+        elif choice == 2:
+            common_base = most_common_base(dna_sequence)
+            print("Most common base:", common_base)
+        elif choice == 3:
+            threshold = int(input("Enter the sequence length threshold: "))
+            long_sequences = find_long_sequences(dna_sequence, threshold)
+            print("Sequences longer than", threshold, "bases:", long_sequences)
+        elif choice == 4:
+            reversed_sequence = reverse_sequence(dna_sequence)
+            print("Reversed DNA sequence:", ''.join(reversed_sequence))
+        elif choice == 5:
+            print("Exiting the program.")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+# Run the program
+genomic_data_menu()
