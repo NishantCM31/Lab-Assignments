@@ -74,6 +74,7 @@ class RentalRecord:
     def __str__(self):
         return f"Rental Record: {self.customer.name} rented {self.vehicle.brand} {self.vehicle.model} (ID: {self.vehicle.vehicle_id}) on {self.rental_date.strftime('%Y-%m-%d')}"
 
+
 class RentalService:
     def __init__(self):
         self.fleet = []
@@ -119,34 +120,93 @@ class RentalService:
                 print(f"{record} - {return_info}")
 
 
-# Test the Vehicle Rental System
-if __name__ == "__main__":
-    # Create a rental service
+# Menu-Driven System
+def main():
     rental_service = RentalService()
+    customers = {}
 
-    # Add vehicles to the fleet
-    car1 = Car(101, "Toyota", "Corolla", 50, 4)
-    bike1 = Bike(201, "Yamaha", "MT-09", 30, "Sport")
-    truck1 = Truck(301, "Ford", "F-150", 100, 5)
-    
-    rental_service.add_vehicle(car1)
-    rental_service.add_vehicle(bike1)
-    rental_service.add_vehicle(truck1)
+    while True:
+        print("\n--- Vehicle Rental System ---")
+        print("1. Add Vehicle")
+        print("2. View Available Vehicles")
+        print("3. Register Customer")
+        print("4. Rent a Vehicle")
+        print("5. Return a Vehicle")
+        print("6. View Customer Rental History")
+        print("7. Exit")
+        
+        choice = input("Enter your choice: ")
+        
+        if choice == '1':
+            vehicle_type = input("Enter vehicle type (Car/Bike/Truck): ").strip().lower()
+            vehicle_id = int(input("Enter vehicle ID: "))
+            brand = input("Enter brand: ")
+            model = input("Enter model: ")
+            rental_price = float(input("Enter rental price per day: "))
+            
+            if vehicle_type == 'car':
+                num_doors = int(input("Enter number of doors: "))
+                vehicle = Car(vehicle_id, brand, model, rental_price, num_doors)
+            elif vehicle_type == 'bike':
+                bike_type = input("Enter bike type (e.g., Sport, Cruiser): ")
+                vehicle = Bike(vehicle_id, brand, model, rental_price, bike_type)
+            elif vehicle_type == 'truck':
+                load_capacity = float(input("Enter load capacity (in tons): "))
+                vehicle = Truck(vehicle_id, brand, model, rental_price, load_capacity)
+            else:
+                print("Invalid vehicle type!")
+                continue
 
-    # View available vehicles
-    rental_service.view_available_vehicles()
+            rental_service.add_vehicle(vehicle)
+            print("Vehicle added successfully.")
 
-    # Create a customer
-    customer1 = Customer("John Doe", "D12345")
+        elif choice == '2':
+            rental_service.view_available_vehicles()
 
-    # Rent a vehicle
-    customer1.rent_vehicle(car1, rental_service)
+        elif choice == '3':
+            name = input("Enter customer name: ")
+            license_number = input("Enter driver's license number: ")
+            customers[license_number] = Customer(name, license_number)
+            print("Customer registered successfully.")
 
-    # View available vehicles after renting
-    rental_service.view_available_vehicles()
+        elif choice == '4':
+            license_number = input("Enter customer license number: ")
+            if license_number in customers:
+                vehicle_id = int(input("Enter vehicle ID to rent: "))
+                vehicle = next((v for v in rental_service.fleet if v.vehicle_id == vehicle_id), None)
+                if vehicle:
+                    customers[license_number].rent_vehicle(vehicle, rental_service)
+                else:
+                    print("Vehicle not found.")
+            else:
+                print("Customer not registered.")
 
-    # Return the vehicle
-    customer1.return_vehicle(car1, rental_service, datetime(2024, 9, 10))
+        elif choice == '5':
+            license_number = input("Enter customer license number: ")
+            if license_number in customers:
+                vehicle_id = int(input("Enter vehicle ID to return: "))
+                return_date = datetime.strptime(input("Enter return date (YYYY-MM-DD): "), "%Y-%m-%d")
+                vehicle = next((v for v in rental_service.fleet if v.vehicle_id == vehicle_id), None)
+                if vehicle:
+                    customers[license_number].return_vehicle(vehicle, rental_service, return_date)
+                else:
+                    print("Vehicle not found.")
+            else:
+                print("Customer not registered.")
 
-    # View rental history for the customer
-    rental_service.view_rental_history(customer1)
+        elif choice == '6':
+            license_number = input("Enter customer license number: ")
+            if license_number in customers:
+                rental_service.view_rental_history(customers[license_number])
+            else:
+                print("Customer not registered.")
+
+        elif choice == '7':
+            print("Exiting the system.")
+            break
+
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()

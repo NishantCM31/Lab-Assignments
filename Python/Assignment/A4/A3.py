@@ -26,9 +26,6 @@ def find_long_sequences(dna_sequence, threshold):
         sequences.append(current_seq)
     return sequences
 
-# Function to reverse the DNA sequence
-def reverse_sequence(dna_sequence):
-    return dna_sequence[::-1]
 
 # Function to validate the DNA sequence input
 def is_valid_dna_sequence(dna_sequence):
@@ -44,7 +41,7 @@ def genomic_data_menu():
             break
         else:
             print("Invalid sequence. Please enter only A, T, C, G.")
-
+    
     while True:
         print("\nMenu:")
         print("1. Count the frequency of each base (A, T, C, G)")
@@ -66,8 +63,8 @@ def genomic_data_menu():
             long_sequences = find_long_sequences(dna_sequence, threshold)
             print("Sequences longer than", threshold, "bases:", long_sequences)
         elif choice == 4:
-            reversed_sequence = reverse_sequence(dna_sequence)
-            print("Reversed DNA sequence:", ''.join(reversed_sequence))
+            
+            print("Reversed DNA sequence:",dna_sequence[::-1])
         elif choice == 5:
             print("Exiting the program.")
             break

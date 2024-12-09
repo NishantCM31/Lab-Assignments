@@ -32,8 +32,7 @@ def print_daily_changes(changes):
     print("\nDaily Percentage Change:")
     print("{:<10} {:<10} {:<10} {:<10} {:<10}".format("Day", "Stock 1", "Stock 2", "Stock 3", "Stock 4"))
     for day in range(9):  # Only 9 changes
-        print("{:<10} {:<10.2f} {:<10.2f} {:<10.2f} {:<10.2f}".format(day + 2, 
-              changes[0][day], changes[1][day], changes[2][day], changes[3][day]))
+        print("{:<10} {:<10.2f} {:<10.2f} {:<10.2f} {:<10.2f}".format(day + 2,changes[0][day], changes[1][day], changes[2][day], changes[3][day]))
 
 def main():
     prices = get_stock_prices()

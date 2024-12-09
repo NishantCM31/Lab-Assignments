@@ -111,52 +111,102 @@ class School:
         return f"School: {self.name}"
 
 
-# Test the School Management System
+# Menu-driven interface
+def main():
+    school_name = input("Enter the name of the school: ")
+    school = School(school_name)
+
+    while True:
+        print("\n--- School Management System ---")
+        print("1. Add Student")
+        print("2. Add Teacher")
+        print("3. Add Course")
+        print("4. Enroll Student in Course")
+        print("5. Assign Teacher to Course")
+        print("6. View Students in Course")
+        print("7. View Courses for a Student")
+        print("8. Calculate Average Grade for a Course")
+        print("9. Exit")
+
+        choice = input("Enter your choice (1-9): ")
+
+        if choice == '1':
+            name = input("Enter student name: ")
+            age = int(input("Enter student age: "))
+            student_id = int(input("Enter student ID: "))
+            student = Student(name, age, student_id)
+            school.add_student(student)
+            print(f"Student {name} added successfully.")
+
+        elif choice == '2':
+            name = input("Enter teacher name: ")
+            age = int(input("Enter teacher age: "))
+            teacher_id = int(input("Enter teacher ID: "))
+            subject = input("Enter teacher subject: ")
+            teacher = Teacher(name, age, teacher_id, subject)
+            school.add_teacher(teacher)
+            print(f"Teacher {name} added successfully.")
+
+        elif choice == '3':
+            course_name = input("Enter course name: ")
+            course_id = int(input("Enter course ID: "))
+            course = Course(course_name, course_id)
+            school.add_course(course)
+            print(f"Course {course_name} added successfully.")
+
+        elif choice == '4':
+            student_id = int(input("Enter student ID: "))
+            course_id = int(input("Enter course ID: "))
+            student = next((s for s in school.students if s.person_id == student_id), None)
+            course = next((c for c in school.courses if c.course_id == course_id), None)
+            if student and course:
+                school.enroll_student_in_course(student, course)
+                print(f"Student {student.name} enrolled in {course.course_name}.")
+            else:
+                print("Student or course not found.")
+
+        elif choice == '5':
+            teacher_id = int(input("Enter teacher ID: "))
+            course_id = int(input("Enter course ID: "))
+            teacher = next((t for t in school.teachers if t.person_id == teacher_id), None)
+            course = next((c for c in school.courses if c.course_id == course_id), None)
+            if teacher and course:
+                school.assign_teacher_to_course(teacher, course)
+                print(f"Teacher {teacher.name} assigned to {course.course_name}.")
+            else:
+                print("Teacher or course not found.")
+
+        elif choice == '6':
+            course_id = int(input("Enter course ID: "))
+            course = next((c for c in school.courses if c.course_id == course_id), None)
+            if course:
+                school.view_students_in_course(course)
+            else:
+                print("Course not found.")
+
+        elif choice == '7':
+            student_id = int(input("Enter student ID: "))
+            student = next((s for s in school.students if s.person_id == student_id), None)
+            if student:
+                school.view_courses_for_student(student)
+            else:
+                print("Student not found.")
+
+        elif choice == '8':
+            course_id = int(input("Enter course ID: "))
+            course = next((c for c in school.courses if c.course_id == course_id), None)
+            if course:
+                school.calculate_average_grade_for_course(course)
+            else:
+                print("Course not found.")
+
+        elif choice == '9':
+            print("Exiting the system. Goodbye!")
+            break
+
+        else:
+            print("Invalid choice. Please enter a number between 1 and 9.")
+
+
 if __name__ == "__main__":
-    # Create a school
-    school = School("Greenfield High")
-
-    # Create students
-    student1 = Student("Alice Johnson", 16, 1001)
-    student2 = Student("Bob Smith", 17, 1002)
-
-    # Create teachers
-    teacher1 = Teacher("Ms. Rose", 35, 2001, "Mathematics")
-    teacher2 = Teacher("Mr. Thompson", 40, 2002, "Physics")
-
-    # Create courses
-    course1 = Course("Algebra", 3001)
-    course2 = Course("Physics", 3002)
-
-    # Add students, teachers, and courses to the school
-    school.add_student(student1)
-    school.add_student(student2)
-    school.add_teacher(teacher1)
-    school.add_teacher(teacher2)
-    school.add_course(course1)
-    school.add_course(course2)
-
-    # Enroll students in courses
-    school.enroll_student_in_course(student1, course1)
-    school.enroll_student_in_course(student2, course1)
-    school.enroll_student_in_course(student2, course2)
-
-    # Assign teachers to courses
-    school.assign_teacher_to_course(teacher1, course1)
-    school.assign_teacher_to_course(teacher2, course2)
-
-    # Assign grades to students
-    student1.grade = 85
-    student2.grade = 90
-
-    # View students in a course
-    school.view_students_in_course(course1)
-
-    # View all courses a student is enrolled in
-    school.view_courses_for_student(student2)
-
-    # Calculate the average grade for a course
-    school.calculate_average_grade_for_course(course1)
-
-    # View the course details
-    print(course1)
+    main()
